@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/08/05 17:12:37 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/08/05 17:17:43 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(void)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    void	*mlx;
-	void	*win;
-
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	while (lst != NULL)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}	
 }

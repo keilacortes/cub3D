@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/07/20 13:34:15 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/08/07 17:17:49 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(void)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    void	*mlx;
-	void	*win;
+	size_t	value;
+	char	*ptr;
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (size > (size_t)(-1) / nmemb)
+		return (0);
+	value = nmemb * size;
+	ptr = malloc(value);
+	if (ptr == 0)
+		return (0);
+	ft_bzero(ptr, value);
+	return (ptr);
 }

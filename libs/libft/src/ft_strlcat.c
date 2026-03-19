@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/07/14 18:55:54 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/07/25 18:01:20 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(void)
+int	ft_strlcat(char *dst, const char *src, size_t size)
 {
-    void	*mlx;
-	void	*win;
+	size_t	len_d;
+	size_t	len_s;
+	size_t	i;
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	len_d = 0;
+	len_s = 0;
+	while (dst[len_d] != '\0')
+		len_d++;
+	while (src[len_s] != '\0')
+		len_s++;
+	if (len_d >= size)
+		return (size + len_s);
+	i = 0;
+	while ((len_d + i + 1) < size && src[i] != '\0')
+	{
+		dst[len_d + i] = src[i];
+		i++;
+	}
+	dst[len_d + i] = '\0';
+	return (len_d + len_s);
 }

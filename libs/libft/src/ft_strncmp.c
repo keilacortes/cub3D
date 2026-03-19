@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/07/16 19:31:03 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/07/25 18:03:02 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    void	*mlx;
-	void	*win;
+	size_t	i;
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0') && (i < n))
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/07/14 19:18:45 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/07/18 23:19:21 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int main(void)
+int	ft_atoi(const char *nptr)
 {
-    void	*mlx;
-	void	*win;
+	int	i;
+	int	sign;
+	int	nb;
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	nb = 0;
+	i = 0;
+	sign = 1;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nb = (nb * 10) + (nptr[i] - '0');
+		i++;
+	}
+	return (nb * sign);
 }

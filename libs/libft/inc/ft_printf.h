@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/08/09 13:56:57 by kqueiroz          #+#    #+#             */
+/*   Updated: 2026/02/08 01:14:17 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int main(void)
-{
-    void	*mlx;
-	void	*win;
+# include <stdint.h>
+# include <stdarg.h>
+# include <unistd.h>
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
-}
+int	ft_printf(const char *format, ...);
+int	pf_putchar_fd(char c, int fd);
+int	pf_putstr_fd(char *s, int fd);
+int	pf_putnbr_fd(int n, int fd);
+int	pf_putunsigned_fd(unsigned int n, int fd);
+int	pf_puthex_fd(unsigned int n, char format, int fd);
+int	pf_putptr_fd(void *ptr, int fd);
+
+#endif

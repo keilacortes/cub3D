@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/19 18:10:06 by kqueiroz         ###   ########.fr       */
+/*   Created: 2025/07/18 16:23:38 by kqueiroz          #+#    #+#             */
+/*   Updated: 2025/07/25 18:04:26 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-    void	*mlx;
-	void	*win;
+	size_t	i;
+	size_t	j;
 
-    ft_putendl_fd("Hello, World!", 1);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-    mlx_loop(mlx);
+	i = 0;
+	if (little[0] == '\0')
+		return ((char *)&big[i]);
+	while (i < len && big[i] != '\0')
+	{
+		j = 0;
+		while ((i + j) < len && big[i + j] == little[j] && little[j] != '\0')
+		{
+			j++;
+		}
+		if (little[j] == '\0')
+			return ((char *)&big[i]);
+		i++;
+	}
+	return (0);
 }

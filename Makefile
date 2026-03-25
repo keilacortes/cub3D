@@ -8,8 +8,8 @@ LIBFT     = $(LIBFT_DIR)/libft.a
 MLX_DIR = libs/minilibx
 MLX     = $(MLX_DIR)/libmlx_Linux.a
 
-SRCS = $(addprefix srcs/, \
-	main.c \
+SRCS = $(addprefix srcs/, main.c \
+						  cub3d_utils.c \
 )
 
 OBJS = $(SRCS:.c=.o)

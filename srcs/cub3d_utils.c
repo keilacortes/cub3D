@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/25 14:07:09 by kqueiroz         ###   ########.fr       */
+/*   Created: 2026/03/25 13:20:16 by kqueiroz          #+#    #+#             */
+/*   Updated: 2026/03/25 14:09:05 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	exit_error(char *message)
 {
-	if (argc != 2)
-		exit_error("Usage: ./cub3d <file.cub>");
-	void	*mlx;
-	void	*win;
+	ft_printf(STDERR_FILENO, "Error\n%s\n", message);
+	exit(1);
+}
 
-	check_arg(argv[1]);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "cub3D");
-	(void)win;
-	mlx_loop(mlx);
+void	check_arg(char *arg)
+{
+	if (!ft_strnstr(arg, ".cub", ft_strlen(arg)))
+		exit_error("Incorrect file extension, please use a <.cub> file");
 }

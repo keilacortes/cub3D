@@ -3,10 +3,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = libs/libft
-LIBFT     = $(LIBFT_DIR)/libft.a
+LIBFT	  = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = libs/minilibx
-MLX     = $(MLX_DIR)/libmlx_Linux.a
+MLX		= $(MLX_DIR)/libmlx_Linux.a
 
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
@@ -15,8 +15,8 @@ SRCS = $(addprefix srcs/, main.c \
 OBJS = $(SRCS:.c=.o)
 
 INC = -I./inc \
-      -I$(LIBFT_DIR)/inc \
-      -I$(MLX_DIR)
+	  -I$(LIBFT_DIR)/inc \
+	  -I$(MLX_DIR)
 
 GREEN  = \033[0;32m
 YELLOW = \033[1;33m
@@ -57,5 +57,13 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+VALGRIND_FLAGS = --leak-check=full \
+				 --show-leak-kinds=all \
+				 --track-origins=yes
+
+valgrind: $(NAME)
+	@echo "$(BLUE)Running with Valgrind...$(RESET)"
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
 
 .PHONY: all clean fclean re

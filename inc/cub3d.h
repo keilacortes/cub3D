@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/25 15:51:51 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/27 14:42:01 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_textures
 {
@@ -52,6 +53,11 @@ typedef struct s_game
 }	t_game;
 
 void	exit_error(char *message);
-void	check_arg(char *arg);
+void	check_arg(char *arg, t_game *game);
+void	parse_file(const char *file, t_game *game);
+//utils parse
+void	free_split(char **arr);
+int		is_valid_num(char *str);
+char	*get_value(char *line);
 
 #endif

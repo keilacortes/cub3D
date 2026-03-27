@@ -11,14 +11,14 @@
 
 ## 🗺️ Parser — Arquivo `.cub`
 
-- [ ] Parsear textura Norte (`NO ./path`)
-- [ ] Parsear textura Sul (`SO ./path`)
-- [ ] Parsear textura Oeste (`WE ./path`)
-- [ ] Parsear textura Leste (`EA ./path`)
-- [ ] Parsear cor do chão — `F R,G,B` (valores entre 0 e 255)
-- [ ] Parsear cor do teto — `C R,G,B` (valores entre 0 e 255)
+- [x] Parsear textura Norte (`NO ./path`)
+- [x] Parsear textura Sul (`SO ./path`)
+- [x] Parsear textura Oeste (`WE ./path`)
+- [x] Parsear textura Leste (`EA ./path`)
+- [x] Parsear cor do chão — `F R,G,B` (valores entre 0 e 255)
+- [x] Parsear cor do teto — `C R,G,B` (valores entre 0 e 255)
 - [ ] Elementos podem estar em qualquer ordem (exceto o mapa, que deve ser o último)
-- [ ] Elementos podem ser separados por uma ou mais linhas vazias entre si
+- [x] Elementos podem ser separados por uma ou mais linhas vazias entre si
 - [ ] Informações de cada elemento podem ser separadas por um ou mais espaços
 - [ ] Mapa composto apenas pelos caracteres: `0`, `1`, `N`, `S`, `E`, `W`
 - [ ] Somente uma posição inicial de jogador (`N`, `S`, `E` ou `W`) no mapa

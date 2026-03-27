@@ -10,6 +10,8 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
+						  parse_file.c \
+						  parse_utils.c \
 )
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 11:00:37 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 16:58:06 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_textures
 typedef struct s_map
 {
 	char	**grid;
-	int		width;
+	char	spawn;
 	int		height;
 }	t_map;
 
@@ -41,6 +41,7 @@ typedef struct s_player
 {
 	int	pos_x;
 	int	pos_y;
+	int	spawn_found;
 }	t_player;
 
 typedef struct s_game
@@ -60,6 +61,7 @@ void	parse_file(const char *file, t_game *game);
 int		is_valid_num(char *str);
 char	*get_value(char *line);
 //parse_map
-void	parse_map(const char *file, t_map *map);
+void	parse_map(const char *file, t_map *map, t_player *player);
+void	validate_map(t_map *map, t_player *player);
 
 #endif

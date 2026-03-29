@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 16:11:42 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 12:03:20 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 14:37:59 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	copy_map(char **file_grid, int lines, t_map *map)
 	map->grid[i] = NULL;
 }
 
-void	parse_map(const char *file, t_map *map)
+void	parse_map(const char *file, t_map *map, t_player *player)
 {
 	char	**file_grid;
 	int		lines;
@@ -105,4 +105,5 @@ void	parse_map(const char *file, t_map *map)
 		lines++;
 	copy_map(file_grid, lines, map);
 	free_grid(file_grid);
+	validate_map(map, player);
 }

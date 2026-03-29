@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 11:03:30 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 14:39:33 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ void	parse_file(const char *file, t_game *game)
 	parse_elements(file, game);
 	validate_textures(&game->tex);
 	validate_colors(&game->tex);
-	parse_map(file, &game->map);
+	parse_map(file, &game->map, &game->player);
 }

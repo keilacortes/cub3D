@@ -14,6 +14,7 @@ SRCS = $(addprefix srcs/, main.c \
 						  parse_utils.c \
 						  parse_map.c \
 						  validate_map.c \
+						  tex.c \
 )
 
 OBJS = $(SRCS:.c=.o)

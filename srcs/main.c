@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/25 16:47:38 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 17:02:27 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_game(t_game *game)
 	game->tex.ceiling[1] = -1;
 	game->tex.ceiling[2] = -1;
 	game->map.grid = NULL;
-	game->map.width = 0;
 	game->map.height = 0;
 }
 

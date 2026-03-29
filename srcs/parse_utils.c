@@ -6,21 +6,11 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 14:33:05 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/27 14:42:08 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 11:00:10 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
 
 char	*get_value(char *line)
 {

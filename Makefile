@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 LIBFT_DIR = libs/libft
 LIBFT	  = $(LIBFT_DIR)/libft.a
@@ -12,6 +12,7 @@ SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
 						  parse_file.c \
 						  parse_utils.c \
+						  parse_map.c \
 )
 
 OBJS = $(SRCS:.c=.o)

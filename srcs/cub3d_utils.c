@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:20:16 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/25 16:54:20 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 11:00:17 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ void	check_arg(char *arg, t_game *game)
 	if (ft_strncmp(arg + len - 4, ".cub", 4) != 0)
 		exit_error("Incorrect file extension, please use a <.cub> file");
 	parse_file(arg, game);
+}
+
+void	free_grid(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

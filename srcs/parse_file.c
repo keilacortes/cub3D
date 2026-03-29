@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/27 14:44:08 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/03/29 09:14:42 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,8 @@ static void	parse_elements(const char *file, t_game *game)
 
 static void	validate_textures(t_textures *tex)
 {
-	int	fd;
-
 	if (!tex->north || !tex->south || !tex->west || !tex->east)
 		exit_error("Missing texture element (NO, SO, WE or EA)");
-	fd = open(tex->north, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open north texture file");
-	close(fd);
-	fd = open(tex->south, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open south texture file");
-	close(fd);
-	fd = open(tex->west, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open west texture file");
-	close(fd);
-	fd = open(tex->east, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open east texture file");
-	close(fd);
 }
 
 static void	validate_colors(t_textures *tex)

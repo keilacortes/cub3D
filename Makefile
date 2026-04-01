@@ -2,6 +2,8 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
+OBJ_DIR = obj
+
 LIBFT_DIR = libs/libft
 LIBFT	  = $(LIBFT_DIR)/libft.a
 
@@ -10,14 +12,14 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
-						  parse_file.c \
-						  parse_utils.c \
-						  parse_map.c \
-						  validate_map.c \
-						  tex.c \
+						  parse/parse_file.c \
+						  parse/parse_utils.c \
+						  parse/parse_map.c \
+						  parse/validate_map.c \
+						  parse/validate_tex.c \
 )
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)
 
 INC = -I./inc \
 	  -I$(LIBFT_DIR)/inc \
@@ -39,7 +41,11 @@ $(MLX):
 	@echo "$(BLUE)Compiling MiniLibX...$(RESET)"
 	@make -C $(MLX_DIR) --no-print-directory
 
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/parse
+
+$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
 	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) \
 		-L$(LIBFT_DIR) -lft \
@@ -48,13 +54,13 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 		-o $(NAME)
 	@echo "$(GREEN)Compiled successfully!$(RESET)"
 
-%.o: %.c
+$(OBJ_DIR)/%.o: srcs/%.c
 	@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
 
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
 	@make clean -C $(LIBFT_DIR) --no-print-directory
-	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@echo "$(RED)Full cleaning...$(RESET)"

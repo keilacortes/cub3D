@@ -12,11 +12,11 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
-						  parse_file.c \
-						  parse_utils.c \
-						  parse_map.c \
-						  validate_map.c \
-						  tex.c \
+						  parse/parse_file.c \
+						  parse/parse_utils.c \
+						  parse/parse_map.c \
+						  parse/validate_map.c \
+						  parse/validate_tex.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)
@@ -43,6 +43,7 @@ $(MLX):
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/parse
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
 	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"

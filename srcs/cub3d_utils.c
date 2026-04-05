@@ -6,11 +6,17 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:20:16 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 11:00:17 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/05 07:47:48 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	cleanup_game(t_game *game)
+{
+	if (game->map.grid)
+		free_grid(game->map.grid);
+}
 
 void	exit_error(char *message)
 {

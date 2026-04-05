@@ -12,12 +12,12 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
+						  cleanup_game.c \
 						  parse/parse_file.c \
 						  parse/parse_utils.c \
 						  parse/parse_map.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
-						  cleaunp_game.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)
@@ -42,11 +42,11 @@ $(MLX):
 	@echo "$(BLUE)Compiling MiniLibX...$(RESET)"
 	@make -C $(MLX_DIR) --no-print-directory
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/parse
+$(OBJ_DIR)/%.o: srcs/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) \
 		-L$(LIBFT_DIR) -lft \
@@ -54,9 +54,6 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT) $(MLX)
 		-L/usr/lib -lXext -lX11 -lm -lz \
 		-o $(NAME)
 	@echo "$(GREEN)Compiled successfully!$(RESET)"
-
-$(OBJ_DIR)/%.o: srcs/%.c
-	@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
 
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"

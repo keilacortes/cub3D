@@ -17,13 +17,13 @@
 - [x] Parsear textura Leste (`EA ./path`)
 - [x] Parsear cor do chão — `F R,G,B` (valores entre 0 e 255)
 - [x] Parsear cor do teto — `C R,G,B` (valores entre 0 e 255)
-- [ ] Elementos podem estar em qualquer ordem (exceto o mapa, que deve ser o último)
+- [x] Elementos podem estar em qualquer ordem (exceto o mapa, que deve ser o último)
 - [x] Elementos podem ser separados por uma ou mais linhas vazias entre si
-- [ ] Informações de cada elemento podem ser separadas por um ou mais espaços
-- [ ] Mapa composto apenas pelos caracteres: `0`, `1`, `N`, `S`, `E`, `W`
-- [ ] Somente uma posição inicial de jogador (`N`, `S`, `E` ou `W`) no mapa
-- [ ] Mapa deve ser fechado/cercado de paredes (`1`)
-- [ ] Qualquer falha de configuração retorna `"Error\n"` + mensagem de erro
+- [x] Informações de cada elemento podem ser separadas por um ou mais espaços
+- [x] Mapa composto apenas pelos caracteres: `0`, `1`, `N`, `S`, `E`, `W`
+- [x] Somente uma posição inicial de jogador (`N`, `S`, `E` ou `W`) no mapa
+- [x] Mapa deve ser fechado/cercado de paredes (`1`)
+- [x] Qualquer falha de configuração retorna `"Error\n"` + mensagem de erro
 
 ---
 

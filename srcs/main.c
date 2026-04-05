@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 17:02:27 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/05 07:54:24 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	init_game(t_game *game)
 	game->tex.ceiling[2] = -1;
 	game->map.grid = NULL;
 	game->map.height = 0;
+	game->map.spawn = '\0';
+	game->player.spawn_found = 0;
+	game->player.pos_x = 0;
+	game->player.pos_y = 0;
 }
 
 int	main(int argc, char **argv)

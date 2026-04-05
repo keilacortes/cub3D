@@ -17,6 +17,7 @@ SRCS = $(addprefix srcs/, main.c \
 						  parse/parse_map.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
+						  cleaunp_game.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)
@@ -71,7 +72,8 @@ re: fclean all
 
 VALGRIND_FLAGS = --leak-check=full \
 				 --show-leak-kinds=all \
-				 --track-origins=yes
+				 --track-origins=yes \
+				 --suppressions=valgrind.supp
 
 valgrind: $(NAME)
 	@echo "$(BLUE)Running with Valgrind...$(RESET)"

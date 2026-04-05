@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+void	cleanup_game(t_game *game)
+{
+	if (game->map.grid)
+		free_grid(game->map.grid);
+}
+
 void	exit_error(char *message)
 {
 	ft_printf(STDERR_FILENO, "Error\n%s\n", message);

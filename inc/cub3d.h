@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 16:58:06 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/05 08:50:51 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_game
 
 void	exit_error(char *message);
 void	free_grid(char **arr);
+void	cleanup_game(t_game *game);
 void	check_arg(char *arg, t_game *game);
 void	parse_file(const char *file, t_game *game);
 //utils parse

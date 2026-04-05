@@ -17,6 +17,7 @@ SRCS = $(addprefix srcs/, main.c \
 						  parse/parse_map.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
+						  cleaunp_game.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)

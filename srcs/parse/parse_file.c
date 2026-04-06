@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 14:39:33 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/06 18:18:20 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,14 @@ static void	validate_colors(t_textures *tex)
 	else if (tex->ceiling[0] == -1)
 		exit_error("Missing color element (C)");
 	i = 0;
-	if (tex->floor[i] < 0 || tex->floor[i] > 255 || tex->ceiling[i] < 0
-		|| tex->ceiling[i] > 255)
+	while (i < 3)
 	{
-		exit_error("Color value out of range [0, 255]");
+		if (tex->floor[i] < 0 || tex->floor[i] > 255 || tex->ceiling[i] < 0
+			|| tex->ceiling[i] > 255)
+		{
+			exit_error("Color value out of range [0, 255]");
+		}
+		i++;
 	}
 }
 

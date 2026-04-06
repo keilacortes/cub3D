@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/05 08:50:51 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:33:21 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ char	*get_value(char *line);
 //parse_map
 void	parse_map(const char *file, t_map *map, t_player *player);
 void	validate_map(t_map *map, t_player *player);
+void	check_file_tex(t_textures *tex);
 
 #endif

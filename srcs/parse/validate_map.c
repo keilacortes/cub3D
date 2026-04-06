@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 12:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/03/29 17:03:46 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/06 18:34:54 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	player_pos(t_player *player, char c, int x, int y)
 	return (0);
 }
 
-void	validate_char(char **grid, t_player *player)
+void	validate_char(char **grid, t_player *player, t_map *map)
 {
 	int	i;
 	int	j;
@@ -39,7 +39,9 @@ void	validate_char(char **grid, t_player *player)
 		{
 			if (grid[i][j] != '1' && grid[i][j] != '0' && grid[i][j] != ' ')
 			{
-				if (!player_pos(player, grid[i][j], i, j))
+				if (player_pos(player, grid[i][j], i, j))
+					map->spawn = grid[i][j];
+				else
 				{
 					free_grid(grid);
 					exit_error("Map has invalid characters");
@@ -98,7 +100,7 @@ int	validate_path(char **grid, int height, char spawn)
 
 void	validate_map(t_map *map, t_player *player)
 {
-	validate_char(map->grid, player);
+	validate_char(map->grid, player, map);
 	if (validate_path(map->grid, map->height, map->spawn))
 	{
 		free_grid(map->grid);

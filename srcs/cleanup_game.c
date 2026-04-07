@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 08:47:03 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 11:29:28 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:36:20 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	cleanup_game(t_game *game)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		mlx_destroy_display(game->mlx);
+	exit (0);
 	return (0);
 }

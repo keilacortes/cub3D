@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 16:37:17 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:38:22 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	check_file_tex(t_textures *tex);
 // controls
 	void	setup_hooks(t_game *game);
 	int		game_loop(t_game *game);
+	void	handle_movement(t_game *game);
 	void	draw_minimap(t_game *game);
 #endif

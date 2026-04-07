@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 19:35:12 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 12:00:58 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:39:13 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	draw_minimap(t_game *game)
 		while (game->map.grid[y][x])
 		{
 			if (game->map.grid[y][x] == '1')
-				draw_square(game, x, y, 0x7F00FF); // parede
+				draw_square(game, x, y, 0x7F00FF);
 			else if (game->map.grid[y][x] == '0')
-				draw_square(game, x, y, 0x555555); // chão
+				draw_square(game, x, y, 0x555555);
 			x++;
 		}
 		y++;
@@ -81,13 +81,6 @@ void	draw_minimap(t_game *game)
 int	game_loop(t_game *game)
 {
 	handle_movement(game);
-	// raycasting
 	draw_minimap(game);
 	return (0);
-}
-
-void	close_game(t_game *game)
-{
-	cleanup_game(game);
-	exit(0);
 }

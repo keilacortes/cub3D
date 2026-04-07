@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 12:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/06 18:34:54 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:58:12 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,37 @@ int	player_pos(t_player *player, char c, int x, int y)
 		return (0);
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		player->pos_x = x;
-		player->pos_y = y;
+		player->pos_x = y;
+		player->pos_y = x;
 		player->spawn_found = 1;
+		if (c == 'N')
+		{
+			player->dir_x = 0;
+			player->dir_y = -1;
+			player->plane_x = 0.66;
+			player->plane_y = 0;
+		}
+		else if (c == 'S')
+		{
+			player->dir_x = 0;
+			player->dir_y = 1;
+			player->plane_x = -0.66;
+			player->plane_y = 0;
+		}
+		else if (c == 'E')
+		{
+			player->dir_x = 1;
+			player->dir_y = 0;
+			player->plane_x = 0;
+			player->plane_y = 0.66;
+		}
+		else if (c == 'W')
+		{
+			player->dir_x = -1;
+			player->dir_y = 0;
+			player->plane_x = 0;
+			player->plane_y = -0.66;
+		}
 		return (1);
 	}
 	return (0);
@@ -40,7 +68,10 @@ void	validate_char(char **grid, t_player *player, t_map *map)
 			if (grid[i][j] != '1' && grid[i][j] != '0' && grid[i][j] != ' ')
 			{
 				if (player_pos(player, grid[i][j], i, j))
+				{
 					map->spawn = grid[i][j];
+					grid[i][j] = '0';
+				}
 				else
 				{
 					free_grid(grid);

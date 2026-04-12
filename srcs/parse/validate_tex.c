@@ -30,6 +30,8 @@ void check_file_tex(t_textures *tex)
 		exit_error("Could not open south texture file");
 	}
 	close(fd);
+	fd = open(tex->west, O_RDONLY);
+	if (fd < 0)
 	{
 		free(tex->west);
 		exit_error("Could not open west texture file");

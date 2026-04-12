@@ -13,6 +13,9 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
 						  cleanup_game.c \
+						  controls/hooks.c \
+						  controls/movement.c \
+						  controls/minimap.c \
 						  parse/parse_file.c \
 						  parse/parse_utils.c \
 						  parse/parse_map.c \

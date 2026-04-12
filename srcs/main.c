@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/05 07:54:24 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/07 13:42:06 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,28 @@ void	init_game(t_game *game)
 	game->player.spawn_found = 0;
 	game->player.pos_x = 0;
 	game->player.pos_y = 0;
+	game->player.dir_x = 0;
+	game->player.dir_y = 0;
+	game->player.plane_x = 0;
+	game->player.plane_y = 0;
+	game->player.keys.a = 0;
+	game->player.keys.d = 0;
+	game->player.keys.s = 0;
+	game->player.keys.w = 0;
+	game->player.keys.left = 0;
+	game->player.keys.right = 0;
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	void	*win;
 
 	if (argc != 2)
 		exit_error("Usage: ./cub3d <file.cub>");
 	init_game(&game);
 	check_arg(argv[1], &game);
 	game.mlx = mlx_init();
-	win = mlx_new_window(game.mlx, 800, 600, "cub3D");
-	(void)win;
+	game.win = mlx_new_window(game.mlx, 800, 600, "cub3D");
+	setup_hooks(&game);
 	mlx_loop(game.mlx);
 }

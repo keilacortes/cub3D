@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 14:11:44 by kqueiroz          #+#    #+#             */
-/*   Updated: 2025/10/07 14:33:33 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/15 20:23:59 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "libft.h"
 
 char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s);
-size_t	ft_strlen(const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

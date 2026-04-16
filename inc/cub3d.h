@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 16:38:22 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/15 22:20:00 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <stdio.h>
 # include <math.h>
 
+# define WIDTH			800
+# define HEIGHT			600
+
 # define KEY_W		119
 # define KEY_A		100
 # define KEY_S		115
@@ -29,11 +32,20 @@
 # define KEY_RIGHT	65363
 # define KEY_ESC	65307
 
-# define MOVE_SPEED		1
-# define ROT_SPEED		1
+# define MOVE_SPEED		0.01
+# define ROT_SPEED		0.01
 # define MINIMAP_SCALE	10
 # define MINIMAP_X		10
 # define MINIMAP_Y		10
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
 
 typedef struct s_textures
 {
@@ -79,6 +91,7 @@ typedef struct s_game
 	t_map		map;
 	t_textures	tex;
 	t_player	player;
+	t_img		screen;
 	void		*mlx;
 	void		*win;
 }	t_game;
@@ -96,8 +109,11 @@ void	parse_map(const char *file, t_map *map, t_player *player);
 void	validate_map(t_map *map, t_player *player);
 void	check_file_tex(t_textures *tex);
 // controls
-	void	setup_hooks(t_game *game);
-	int		game_loop(t_game *game);
-	void	handle_movement(t_game *game);
-	void	draw_minimap(t_game *game);
+void	setup_hooks(t_game *game);
+int		game_loop(t_game *game);
+void	handle_movement(t_game *game);
+void	draw_minimap(t_game *game);
+// render
+void	render_3d(t_game *game);
+
 #endif

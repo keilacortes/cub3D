@@ -21,7 +21,10 @@ SRCS = $(addprefix srcs/, main.c \
 						  parse/parse_map.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
-						  render/raycasting.c \
+						  render/render_3d.c \
+						  render/ray_init.c \
+						  render/ray_dda.c \
+						  render/ray_project.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)

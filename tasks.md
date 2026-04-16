@@ -29,11 +29,11 @@
 
 ## 🎮 Engine — Ray-Casting
 
-- [ ] Implementar algoritmo de ray-casting
-- [ ] Renderizar visão 3D em primeira pessoa do labirinto
-- [ ] Exibir textura diferente para cada direção de parede (N, S, E, O)
-- [ ] Renderizar chão com a cor configurada no `.cub`
-- [ ] Renderizar teto com a cor configurada no `.cub`
+- [x] Implementar algoritmo de ray-casting
+- [x] Renderizar visão 3D em primeira pessoa do labirinto
+- [x] Exibir textura diferente para cada direção de parede (N, S, E, O)
+- [x] Renderizar chão com a cor configurada no `.cub`
+- [x] Renderizar teto com a cor configurada no `.cub`
 
 ---
 
@@ -48,14 +48,14 @@
 
 ## ⌨️ Controles
 
-- [ ] Seta `←` — rotacionar câmera para a esquerda
-- [ ] Seta `→` — rotacionar câmera para a direita
-- [ ] Tecla `W` — mover para frente
-- [ ] Tecla `S` — mover para trás
-- [ ] Tecla `A` — mover para a esquerda
-- [ ] Tecla `D` — mover para a direita
-- [ ] Tecla `ESC` — fechar janela e encerrar o programa de forma limpa
-- [ ] Clicar no `X` da janela — fechar e encerrar de forma limpa
+- [x] Seta `←` — rotacionar câmera para a esquerda
+- [x] Seta `→` — rotacionar câmera para a direita
+- [x] Tecla `W` — mover para frente
+- [x] Tecla `S` — mover para trás
+- [x] Tecla `A` — mover para a esquerda
+- [x] Tecla `D` — mover para a direita
+- [x] Tecla `ESC` — fechar janela e encerrar o programa de forma limpa
+- [x] Clicar no `X` da janela — fechar e encerrar de forma limpa
 
 ---
 
@@ -79,7 +79,7 @@
 
 ## ⭐ Bônus *(?)*
 
-- [ ] Colisão com as paredes
+- [x] Colisão com as paredes
 - [ ] Minimapa
 - [ ] Portas que abrem e fecham
 - [ ] Sprite animado

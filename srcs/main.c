@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 13:42:06 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/15 22:09:31 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	check_arg(argv[1], &game);
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 800, 600, "cub3D");
+	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "cub3D");
+	game.screen.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
+	game.screen.addr = mlx_get_data_addr(game.screen.img, 
+			&game.screen.bpp, &game.screen.line_len, &game.screen.endian);
 	setup_hooks(&game);
 	mlx_loop(game.mlx);
 }

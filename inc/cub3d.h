@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/15 22:20:00 by loda-sil         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:04:30 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,27 @@ typedef struct s_game
 	void		*win;
 }	t_game;
 
+typedef struct s_ray
+{
+	double	camera_x;		/* coordenada da câmera em X no plano [-1, 1] para a coluna atual */
+	double	ray_dir_x;		/* direção do raio no eixo X */
+	double	ray_dir_y;		/* direção do raio no eixo Y */
+	int		map_x;			/* célula atual do mapa (grid) em X onde o DDA está */
+	int		map_y;			/* célula atual do mapa (grid) em Y onde o DDA está */
+	double	delta_dist_x;	/* distância para cruzar 1 célula no eixo X */
+	double	delta_dist_y;	/* distância para cruzar 1 célula no eixo Y */
+	double	side_dist_x;	/* distância acumulada até a próxima borda vertical (X) */
+	double	side_dist_y;	/* distância acumulada até a próxima borda horizontal (Y) */
+	int		step_x;			/* direção do passo no grid em X (-1 ou +1) */
+	int		step_y;			/* direção do passo no grid em Y (-1 ou +1) */
+	int		hit;			/* flag: 1 quando o raio bate em parede */
+	int		side;			/* lado atingido: 0 = parede vertical, 1 = horizontal */
+	double	perp_dist;		/* distância perpendicular da câmera até a parede (sem fish-eye) */
+	int		line_height;	/* altura da parede projetada na tela */
+	int		draw_start;		/* pixel Y inicial da coluna da parede */
+	int		draw_end;		/* pixel Y final da coluna da parede */
+}	t_ray;
+
 void	exit_error(char *message);
 void	free_grid(char **arr);
 int		cleanup_game(t_game *game);
@@ -115,5 +136,9 @@ void	handle_movement(t_game *game);
 void	draw_minimap(t_game *game);
 // render
 void	render_3d(t_game *game);
+void	init_ray(t_game *game, t_ray *ray, int x);
+void	calc_step_side(t_game *game, t_ray *ray);
+void	run_dda(t_game *game, t_ray *ray);
+void	calc_wall_height(t_game *game, t_ray *ray);
 
 #endif

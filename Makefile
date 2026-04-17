@@ -19,9 +19,11 @@ SRCS = $(addprefix srcs/, main.c \
 						  parse/parse_file.c \
 						  parse/parse_utils.c \
 						  parse/parse_map.c \
+						  parse/player_spawn.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
 						  render/render_3d.c \
+						  render/render_walls.c \
 						  render/ray_init.c \
 						  render/ray_dda.c \
 						  render/ray_project.c \

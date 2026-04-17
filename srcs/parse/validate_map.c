@@ -12,75 +12,36 @@
 
 #include "cub3d.h"
 
-int	player_pos(t_player *player, char c, int x, int y)
+static void	validate_tile(char **grid, t_player *player, t_map *map, int pos[2])
 {
-	if (player->spawn_found)
-		return (0);
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	char	c;
+
+	c = grid[pos[0]][pos[1]];
+	if (c == '1' || c == '0' || c == ' ')
+		return ;
+	if (!player_pos(player, c, pos[0], pos[1]))
 	{
-		player->pos_x = y;
-		player->pos_y = x;
-		player->spawn_found = 1;
-		if (c == 'N')
-		{
-			player->dir_x = 0;
-			player->dir_y = -1;
-			player->plane_x = 0.66;
-			player->plane_y = 0;
-		}
-		else if (c == 'S')
-		{
-			player->dir_x = 0;
-			player->dir_y = 1;
-			player->plane_x = -0.66;
-			player->plane_y = 0;
-		}
-		else if (c == 'E')
-		{
-			player->dir_x = 1;
-			player->dir_y = 0;
-			player->plane_x = 0;
-			player->plane_y = 0.66;
-		}
-		else if (c == 'W')
-		{
-			player->dir_x = -1;
-			player->dir_y = 0;
-			player->plane_x = 0;
-			player->plane_y = -0.66;
-		}
-		return (1);
+		free_grid(grid);
+		exit_error("Map has invalid characters");
 	}
-	return (0);
+	map->spawn = c;
+	grid[pos[0]][pos[1]] = '0';
 }
 
 void	validate_char(char **grid, t_player *player, t_map *map)
 {
-	int	i;
-	int	j;
+	int	pos[2];
 
-	i = 0;
-	while (grid[i] != NULL)
+	pos[0] = 0;
+	while (grid[pos[0]] != NULL)
 	{
-		j = 0;
-		while (grid[i][j])
+		pos[1] = 0;
+		while (grid[pos[0]][pos[1]])
 		{
-			if (grid[i][j] != '1' && grid[i][j] != '0' && grid[i][j] != ' ')
-			{
-				if (player_pos(player, grid[i][j], i, j))
-				{
-					map->spawn = grid[i][j];
-					grid[i][j] = '0';
-				}
-				else
-				{
-					free_grid(grid);
-					exit_error("Map has invalid characters");
-				}
-			}
-			j++;
+			validate_tile(grid, player, map, pos);
+			pos[1]++;
 		}
-		i++;
+		pos[0]++;
 	}
 	if (!player->spawn_found)
 		exit_error("Map has no spawn point");

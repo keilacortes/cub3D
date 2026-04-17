@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 19:35:12 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 21:11:42 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/16 21:35:34 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ int	game_loop(t_game *game)
 {
 	handle_movement(game);
 	render_3d(game);
-	//draw_minimap(game); comentado pra focar no 3d
 	return (0);
 }

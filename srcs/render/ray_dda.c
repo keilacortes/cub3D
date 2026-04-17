@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ray_dda.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:08:00 by loda-sil          #+#    #+#             */
-/*   Updated: 2026/04/16 16:53:14 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/16 21:37:40 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char get_map_cell(t_game *game, int y, int x)
+static char	get_map_cell(t_game *game, int y, int x)
 {
-	size_t len;
+	size_t	len;
 
 	if (y < 0 || y >= game->map.height || !game->map.grid[y])
 		return ('1');
@@ -23,7 +23,7 @@ static char get_map_cell(t_game *game, int y, int x)
 		return ('1');
 	if (game->map.grid[y][x] == ' ')
 		return ('1');
-	return (game->map.grid[y][x]); 
+	return (game->map.grid[y][x]);
 }
 
 static void	step_x(t_ray *ray)

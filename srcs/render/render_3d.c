@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:08:00 by loda-sil          #+#    #+#             */
-/*   Updated: 2026/04/16 21:05:33 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/16 21:09:27 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	put_pixel(t_img *img, int x, int y, int color)
 {
-	char *dst;
-	
+	char	*dst;
+
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
@@ -29,13 +29,15 @@ static int	rgb(int r, int g, int b)
 
 static void	draw_floor_ceiling(t_game *game)
 {
-	int x;
-	int y;
-	int ceil_color;
-	int floor_color;
+	int	x;
+	int	y;
+	int	ceil_color;
+	int	floor_color;
 
-	ceil_color = rgb(game->tex.ceiling[0], game->tex.ceiling[1], game->tex.ceiling[2]);
-	floor_color = rgb(game->tex.floor[0], game->tex.floor[1], game->tex.floor[2]);
+	ceil_color = rgb(game->tex.ceiling[0], game->tex.ceiling[1],
+			game->tex.ceiling[2]);
+	floor_color = rgb(game->tex.floor[0], game->tex.floor[1],
+			game->tex.floor[2]);
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -54,8 +56,8 @@ static void	draw_floor_ceiling(t_game *game)
 
 static void	draw_wall_column(t_game *game, t_ray *ray, int x)
 {
-	int y;
-	int color;
+	int	y;
+	int	color;
 
 	if (ray->side == 0)
 		color = 0x00CCFF;

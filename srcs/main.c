@@ -12,6 +12,32 @@
 
 #include "cub3d.h"
 
+static void	init_player(t_player *player)
+{
+	player->spawn_found = 0;
+	player->pos_x = 0;
+	player->pos_y = 0;
+	player->dir_x = 0;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0;
+	player->keys.a = 0;
+	player->keys.d = 0;
+	player->keys.s = 0;
+	player->keys.w = 0;
+	player->keys.left = 0;
+	player->keys.right = 0;
+}
+
+static void	init_mlx(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
+	game->screen.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->screen.addr = mlx_get_data_addr(game->screen.img,
+			&game->screen.bpp, &game->screen.line_len, &game->screen.endian);
+}
+
 void	init_game(t_game *game)
 {
 	game->tex.north = NULL;
@@ -27,19 +53,7 @@ void	init_game(t_game *game)
 	game->map.grid = NULL;
 	game->map.height = 0;
 	game->map.spawn = '\0';
-	game->player.spawn_found = 0;
-	game->player.pos_x = 0;
-	game->player.pos_y = 0;
-	game->player.dir_x = 0;
-	game->player.dir_y = 0;
-	game->player.plane_x = 0;
-	game->player.plane_y = 0;
-	game->player.keys.a = 0;
-	game->player.keys.d = 0;
-	game->player.keys.s = 0;
-	game->player.keys.w = 0;
-	game->player.keys.left = 0;
-	game->player.keys.right = 0;
+	init_player(&game->player);
 }
 
 int	main(int argc, char **argv)
@@ -50,12 +64,9 @@ int	main(int argc, char **argv)
 		exit_error("Usage: ./cub3d <file.cub>");
 	init_game(&game);
 	check_arg(argv[1], &game);
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "cub3D");
-	game.screen.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
-	game.screen.addr = mlx_get_data_addr(game.screen.img, 
-			&game.screen.bpp, &game.screen.line_len, &game.screen.endian);
+	init_mlx(&game);
 	load_textures(&game);
 	setup_hooks(&game);
 	mlx_loop(game.mlx);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 21:28:40 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 15:59:51 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	parse_file(const char *file, t_game *game);
 int		is_valid_num(char *str);
 char	*get_value(char *line);
 void	parse_map(const char *file, t_map *map, t_player *player);
+int		player_pos(t_player *player, char c, int x, int y);
 void	validate_map(t_map *map, t_player *player);
 void	check_file_tex(t_textures *tex);
 void	setup_hooks(t_game *game);
@@ -143,6 +144,7 @@ void	init_ray(t_game *game, t_ray *ray, int x);
 void	calc_step_side(t_game *game, t_ray *ray);
 void	run_dda(t_game *game, t_ray *ray);
 void	calc_wall_height(t_game *game, t_ray *ray);
+void	draw_wall_column(t_game *game, t_ray *ray, int x);
 void	load_textures(t_game *game);
 
 #endif

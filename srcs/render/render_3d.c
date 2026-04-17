@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_3d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:08:00 by loda-sil          #+#    #+#             */
-/*   Updated: 2026/04/16 16:31:27 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/16 21:05:33 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	draw_wall_column(t_game *game, t_ray *ray, int x)
 	if (ray->side == 0)
 		color = 0x00CCFF;
 	else
-		color = 0x009CC;
+		color = 0x0099CC;
 	y = ray->draw_start;
 	while (y <= ray->draw_end)
 	{

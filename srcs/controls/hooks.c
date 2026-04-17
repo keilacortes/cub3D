@@ -6,7 +6,7 @@
 /*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 19:35:23 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 16:34:38 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/16 21:32:41 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	key_press(int key, t_game *game)
 {
 	if (key == KEY_ESC)
-		cleanup_game(game);
+		close_game(game);
 	if (key == KEY_W)
 		game->player.keys.w = 1;
 	if (key == KEY_S)
@@ -52,6 +52,6 @@ void	setup_hooks(t_game *game)
 {
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
-	mlx_hook(game->win, 17, 0, cleanup_game, game);
+	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 }

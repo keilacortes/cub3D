@@ -25,6 +25,7 @@ SRCS = $(addprefix srcs/, main.c \
 						  render/ray_init.c \
 						  render/ray_dda.c \
 						  render/ray_project.c \
+						  render/texture_load.c \
 )
 
 OBJS = $(SRCS:srcs/%.c=$(OBJ_DIR)/%.o)

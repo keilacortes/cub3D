@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 17:04:30 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/16 21:28:40 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_textures
@@ -55,6 +57,10 @@ typedef struct s_textures
 	char	*east;
 	int		floor[3];
 	int		ceiling[3];
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
 }	t_textures;
 
 typedef struct s_map
@@ -98,47 +104,45 @@ typedef struct s_game
 
 typedef struct s_ray
 {
-	double	camera_x;		/* coordenada da câmera em X no plano [-1, 1] para a coluna atual */
-	double	ray_dir_x;		/* direção do raio no eixo X */
-	double	ray_dir_y;		/* direção do raio no eixo Y */
-	int		map_x;			/* célula atual do mapa (grid) em X onde o DDA está */
-	int		map_y;			/* célula atual do mapa (grid) em Y onde o DDA está */
-	double	delta_dist_x;	/* distância para cruzar 1 célula no eixo X */
-	double	delta_dist_y;	/* distância para cruzar 1 célula no eixo Y */
-	double	side_dist_x;	/* distância acumulada até a próxima borda vertical (X) */
-	double	side_dist_y;	/* distância acumulada até a próxima borda horizontal (Y) */
-	int		step_x;			/* direção do passo no grid em X (-1 ou +1) */
-	int		step_y;			/* direção do passo no grid em Y (-1 ou +1) */
-	int		hit;			/* flag: 1 quando o raio bate em parede */
-	int		side;			/* lado atingido: 0 = parede vertical, 1 = horizontal */
-	double	perp_dist;		/* distância perpendicular da câmera até a parede (sem fish-eye) */
-	int		line_height;	/* altura da parede projetada na tela */
-	int		draw_start;		/* pixel Y inicial da coluna da parede */
-	int		draw_end;		/* pixel Y final da coluna da parede */
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	perp_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }	t_ray;
 
 void	exit_error(char *message);
 void	free_grid(char **arr);
-int		cleanup_game(t_game *game);
+void	cleanup_game(t_game *game);
+int		close_game(t_game *game);
 void	check_arg(char *arg, t_game *game);
 void	parse_file(const char *file, t_game *game);
-//utils parse
 int		is_valid_num(char *str);
 char	*get_value(char *line);
-//parse_map
 void	parse_map(const char *file, t_map *map, t_player *player);
 void	validate_map(t_map *map, t_player *player);
 void	check_file_tex(t_textures *tex);
-// controls
 void	setup_hooks(t_game *game);
 int		game_loop(t_game *game);
 void	handle_movement(t_game *game);
 void	draw_minimap(t_game *game);
-// render
 void	render_3d(t_game *game);
 void	init_ray(t_game *game, t_ray *ray, int x);
 void	calc_step_side(t_game *game, t_ray *ray);
 void	run_dda(t_game *game, t_ray *ray);
 void	calc_wall_height(t_game *game, t_ray *ray);
+void	load_textures(t_game *game);
 
 #endif

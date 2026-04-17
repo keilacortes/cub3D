@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/15 22:09:31 by loda-sil         ###   ########.fr       */
+/*   Updated: 2026/04/16 21:17:05 by kqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv)
 	game.screen.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	game.screen.addr = mlx_get_data_addr(game.screen.img, 
 			&game.screen.bpp, &game.screen.line_len, &game.screen.endian);
+	load_textures(&game);
 	setup_hooks(&game);
 	mlx_loop(game.mlx);
 }

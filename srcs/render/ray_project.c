@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_project.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:08:00 by loda-sil          #+#    #+#             */
-/*   Updated: 2026/04/16 20:49:11 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 15:25:58 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	clamp_draw_limits(t_ray *ray)
 void	calc_wall_height(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perp_dist = (ray->map_x - game->player.pos_x +
-			(1 - ray->step_x) / 2.0)
+		ray->perp_dist = (ray->map_x - game->player.pos_x
+			+ (1 - ray->step_x) / 2.0)
 			/ ray->ray_dir_x;
 	else
-		ray->perp_dist = (ray->map_y - game->player.pos_y +
-			(1 - ray->step_y) / 2.0)
+		ray->perp_dist = (ray->map_y - game->player.pos_y
+			+ (1 - ray->step_y) / 2.0)
 			/ ray->ray_dir_y;
 	if (ray->perp_dist < 0.001)
 		ray->perp_dist = 0.001;

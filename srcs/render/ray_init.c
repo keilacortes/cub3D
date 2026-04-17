@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:08:00 by loda-sil          #+#    #+#             */
-/*   Updated: 2026/04/16 21:39:13 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 15:18:28 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,25 @@ void	calc_step_side(t_game *game, t_ray *ray)
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (game->player.pos_x - ray->map_x) * ray->delta_dist_x;
+		ray->side_dist_x = (game->player.pos_x - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player.pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player.pos_x)
+			* ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (game->player.pos_y - ray->map_y) * ray->delta_dist_y;
+		ray->side_dist_y = (game->player.pos_y - ray->map_y)
+			* ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
+			* ray->delta_dist_y;
 	}
 }

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 19:35:12 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 21:35:34 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 15:08:36 by loena            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	put_pixel_img(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
 
 void	draw_player_direction(t_game *game)
 {
@@ -27,7 +37,7 @@ void	draw_player_direction(t_game *game)
 	{
 		draw_x = MINIMAP_X + x * MINIMAP_SCALE + MINIMAP_SCALE / 2.1;
 		draw_y = MINIMAP_Y + y * MINIMAP_SCALE + MINIMAP_SCALE / 2.1;
-		mlx_pixel_put(game->mlx, game->win, draw_x, draw_y, 0x90EE90);
+		put_pixel_img(&game->screen, draw_x, draw_y, 0x90EE90);
 		x += game->player.dir_x * 0.2;
 		y += game->player.dir_y * 0.2;
 		i++;
@@ -45,7 +55,7 @@ static void	draw_square(t_game *game, int x, int y, int color)
 		j = 0;
 		while (j < MINIMAP_SCALE)
 		{
-			mlx_pixel_put(game->mlx, game->win,
+			put_pixel_img(&game->screen,
 				MINIMAP_X + x * MINIMAP_SCALE + j,
 				MINIMAP_Y + y * MINIMAP_SCALE + i, color);
 			j++;
@@ -82,5 +92,6 @@ int	game_loop(t_game *game)
 {
 	handle_movement(game);
 	render_3d(game);
+	draw_minimap(game);
 	return (0);
 }

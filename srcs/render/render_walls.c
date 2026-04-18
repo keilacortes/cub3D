@@ -6,7 +6,7 @@
 /*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:45 by loena             #+#    #+#             */
-/*   Updated: 2026/04/17 20:24:23 by loda-sil         ###   ########.fr       */
+/*   Updated: 2026/04/18 14:35:29 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_img	*get_texture(t_game *game, t_ray *ray)
 		return (&game->tex.ea);
 	}
 	if (ray->step_y > 0)
-		return (&game->tex.no);
-	return (&game->tex.so);
+		return (&game->tex.so);
+	return (&game->tex.no);
 }
 
 static double	get_wall_x(t_game *game, t_ray *ray)

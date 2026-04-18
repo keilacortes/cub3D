@@ -3,52 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   validate_tex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/29 09:09:11 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 17:29:44 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:03:58 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	horizontal(t_textures *tex)
+static void	safe_free(char **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+static void	free_tex_paths(t_textures *tex)
+{
+	safe_free(&tex->north);
+	safe_free(&tex->south);
+	safe_free(&tex->west);
+	safe_free(&tex->east);
+}
+
+static void	check_path(char *path, t_textures *tex, char *msg)
 {
 	int	fd;
 
-	fd = open(tex->west, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		free(tex->west);
-		exit_error("Could not open west texture file");
-	}
-	close(fd);
-	fd = open(tex->east, O_RDONLY);
-	if (fd < 0)
-	{
-		free(tex->east);
-		exit_error("Could not open east texture file");
+		free_tex_paths(tex);
+		exit_error(msg);
 	}
 	close(fd);
 }
 
 void	check_file_tex(t_textures *tex)
 {
-	int	fd;
-
-	fd = open(tex->north, O_RDONLY);
-	if (fd < 0)
-	{
-		free(tex->north);
-		exit_error("Could not open north texture file");
-	}
-	close(fd);
-	fd = open(tex->south, O_RDONLY);
-	if (fd < 0)
-	{
-		free(tex->south);
-		exit_error("Could not open south texture file");
-	}
-	close(fd);
-	horizontal(tex);
+	check_path(tex->north, tex, "Could not open north texture file");
+	check_path(tex->south, tex, "Could not open south texture file");
+	check_path(tex->west, tex, "Could not open west texture file");
+	check_path(tex->east, tex, "Could not open east texture file");
 }

@@ -3,103 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 14:37:56 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/07 16:46:36 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 23:05:00 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_color(char *str, int *rgb)
+static void	free_tex_paths(t_textures *tex)
 {
-	char	**values;
-	int		i;
-
-	values = ft_split(str, ',');
-	i = 0;
-	while (values[i])
-		i++;
-	if (i != 3)
-	{
-		free_grid(values);
-		exit_error("Color must have exactly 3 values (R,G,B)");
-	}
-	i = 0;
-	while (i < 3)
-	{
-		if (!is_valid_num(values[i]))
-		{
-			free_grid(values);
-			exit_error("Invalid color value");
-		}
-		rgb[i] = ft_atoi(values[i]);
-		i++;
-	}
-	free_grid(values);
+	if (tex->north)
+		free(tex->north);
+	if (tex->south)
+		free(tex->south);
+	if (tex->west)
+		free(tex->west);
+	if (tex->east)
+		free(tex->east);
+	tex->north = NULL;
+	tex->south = NULL;
+	tex->west = NULL;
+	tex->east = NULL;
 }
 
-static void	parse_elements(const char *file, t_game *game)
+static void	parse_fail(t_game *game, char *msg)
 {
-	int		fd;
+	free_tex_paths(&game->tex);
+	exit_error(msg);
+}
+
+static void	drain_fd(int fd)
+{
 	char	*line;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		exit_error("Could not open file");
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line)
 	{
-		if (ft_strncmp(line, "NO ", 3) == 0)
-			game->tex.north = get_value(line + 3);
-		else if (ft_strncmp(line, "SO ", 3) == 0)
-			game->tex.south = get_value(line + 3);
-		else if (ft_strncmp(line, "WE ", 3) == 0)
-			game->tex.west = get_value(line + 3);
-		else if (ft_strncmp(line, "EA ", 3) == 0)
-			game->tex.east = get_value(line + 3);
-		else if (ft_strncmp(line, "F ", 2) == 0)
-			parse_color(line + 2, game->tex.floor);
-		else if (ft_strncmp(line, "C ", 2) == 0)
-			parse_color(line + 2, game->tex.ceiling);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 }
 
-static void	validate_textures(t_textures *tex)
+static void	parse_elements(const char *file, t_game *game)
 {
-	if (!tex->north || !tex->south || !tex->west || !tex->east)
-		exit_error("Missing texture element (NO, SO, WE or EA)");
-}
+	int		fd;
+	int		status;
+	char	*line;
 
-static void	validate_colors(t_textures *tex)
-{
-	int	i;
-
-	if (tex->floor[0] == -1)
-		exit_error("Missing color element (F)");
-	else if (tex->ceiling[0] == -1)
-		exit_error("Missing color element (C)");
-	i = 0;
-	while (i < 3)
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		exit_error("Could not open file");
+	line = get_next_line(fd);
+	while (line)
 	{
-		if (tex->floor[i] < 0 || tex->floor[i] > 255 || tex->ceiling[i] < 0
-			|| tex->ceiling[i] > 255)
+		status = parse_element_line(game, line);
+		if (status <= 0)
 		{
-			exit_error("Color value out of range [0, 255]");
+			free(line);
+			drain_fd(fd);
+			if (status == -1)
+				parse_fail(game, "Malloc failed");
+			parse_fail(game, "Duplicate texture or invalid color");
 		}
-		i++;
+		free(line);
+		line = get_next_line(fd);
 	}
+	close(fd);
 }
 
 void	parse_file(const char *file, t_game *game)
 {
+	int	i;
+
 	parse_elements(file, game);
-	validate_textures(&game->tex);
+	if (!game->tex.north || !game->tex.south
+		|| !game->tex.west || !game->tex.east)
+		parse_fail(game, "Missing texture element (NO, SO, WE or EA)");
 	check_file_tex(&game->tex);
-	validate_colors(&game->tex);
-	parse_map(file, &game->map, &game->player);
+	if (game->tex.floor[0] == -1 || game->tex.ceiling[0] == -1)
+		parse_fail(game, "Missing color element (F or C)");
+	i = 0;
+	while (i < 3)
+	{
+		if (game->tex.floor[i] < 0 || game->tex.floor[i] > 255
+			|| game->tex.ceiling[i] < 0 || game->tex.ceiling[i] > 255)
+			parse_fail(game, "Color value out of range [0, 255]");
+		i++;
+	}
+	parse_map(file, game);
 }

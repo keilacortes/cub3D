@@ -13,12 +13,15 @@ MLX		= $(MLX_DIR)/libmlx_Linux.a
 SRCS = $(addprefix srcs/, main.c \
 						  cub3d_utils.c \
 						  cleanup_game.c \
+						  signal_handler.c \
 						  controls/hooks.c \
 						  controls/movement.c \
 						  controls/minimap.c \
 						  parse/parse_file.c \
+						  parse/set_texture.c \
 						  parse/parse_utils.c \
 						  parse/parse_map.c \
+						  parse/parse_map_helpers.c \
 						  parse/player_spawn.c \
 						  parse/validate_map.c \
 						  parse/validate_tex.c \
@@ -79,8 +82,7 @@ re: fclean all
 
 VALGRIND_FLAGS = --leak-check=full \
 				 --show-leak-kinds=all \
-				 --track-origins=yes \
-				 --suppressions=valgrind.supp
+				 --track-origins=yes
 
 valgrind: $(NAME)
 	@echo "$(BLUE)Running with Valgrind...$(RESET)"

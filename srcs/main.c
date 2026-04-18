@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 13:51:06 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 21:17:05 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:54:07 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,29 @@ static void	init_player(t_player *player)
 static void	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit_error_game(game, "mlx_init failed");
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
+	if (!game->win)
+		exit_error_game(game, "mlx_new_window failed");
 	game->screen.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->screen.img)
+		exit_error_game(game, "mlx_new_image failed");
 	game->screen.addr = mlx_get_data_addr(game->screen.img,
 			&game->screen.bpp, &game->screen.line_len, &game->screen.endian);
+	if (!game->screen.addr)
+		exit_error_game(game, "mlx_get_data_addr failed");
+}
+
+static void	init_img(t_img *img)
+{
+	img->img = NULL;
+	img->addr = NULL;
+	img->bpp = 0;
+	img->line_len = 0;
+	img->endian = 0;
+	img->width = 0;
+	img->height = 0;
 }
 
 void	init_game(t_game *game)
@@ -53,7 +72,14 @@ void	init_game(t_game *game)
 	game->map.grid = NULL;
 	game->map.height = 0;
 	game->map.spawn = '\0';
+	game->mlx = NULL;
+	game->win = NULL;
 	init_player(&game->player);
+	init_img(&game->screen);
+	init_img(&game->tex.no);
+	init_img(&game->tex.so);
+	init_img(&game->tex.we);
+	init_img(&game->tex.ea);
 }
 
 int	main(int argc, char **argv)
@@ -67,6 +93,7 @@ int	main(int argc, char **argv)
 	init_mlx(&game);
 	load_textures(&game);
 	setup_hooks(&game);
+	setup_signal_handlers();
 	mlx_loop(game.mlx);
 	return (0);
 }

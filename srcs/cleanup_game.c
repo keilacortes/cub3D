@@ -3,19 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kqueiroz <kqueiroz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 08:47:03 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/16 21:31:37 by kqueiroz         ###   ########.fr       */
+/*   Updated: 2026/04/17 19:59:44 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void	free_tex_paths(t_textures *tex)
+{
+	if (tex->north)
+	{
+		free(tex->north);
+		tex->north = NULL;
+	}
+	if (tex->south)
+	{
+		free(tex->south);
+		tex->south = NULL;
+	}
+	if (tex->west)
+	{
+		free(tex->west);
+		tex->west = NULL;
+	}
+	if (tex->east)
+	{
+		free(tex->east);
+		tex->east = NULL;
+	}
+}
+
 void	cleanup_game(t_game *game)
 {
 	if (!game)
 		return ;
+	if (game->map.grid)
+	{
+		free_grid(game->map.grid);
+		game->map.grid = NULL;
+	}
+	free_tex_paths(&game->tex);
 	if (game->screen.img)
 		mlx_destroy_image(game->mlx, game->screen.img);
 	if (game->tex.no.img)

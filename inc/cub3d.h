@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 18:03:19 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/17 15:59:51 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/17 20:41:39 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 # define HEIGHT			600
 
 # define KEY_W		119
-# define KEY_A		100
+# define KEY_A		97
 # define KEY_S		115
-# define KEY_D		97
+# define KEY_D		100
 # define KEY_LEFT	65361
 # define KEY_RIGHT	65363
 # define KEY_ESC	65307
 
-# define MOVE_SPEED		0.01
-# define ROT_SPEED		0.01
+# define MOVE_SPEED		0.05
+# define ROT_SPEED		0.05
 # define MINIMAP_SCALE	10
 # define MINIMAP_X		10
 # define MINIMAP_Y		10
@@ -124,6 +124,7 @@ typedef struct s_ray
 }	t_ray;
 
 void	exit_error(char *message);
+void	exit_error_game(t_game *game, char *message);
 void	free_grid(char **arr);
 void	cleanup_game(t_game *game);
 int		close_game(t_game *game);
@@ -131,12 +132,18 @@ void	check_arg(char *arg, t_game *game);
 void	parse_file(const char *file, t_game *game);
 int		is_valid_num(char *str);
 char	*get_value(char *line);
-void	parse_map(const char *file, t_map *map, t_player *player);
+void	parse_map(const char *file, t_game *game);
 int		player_pos(t_player *player, char c, int x, int y);
-void	validate_map(t_map *map, t_player *player);
+void	validate_map(t_game *game);
 void	check_file_tex(t_textures *tex);
 void	setup_hooks(t_game *game);
 int		game_loop(t_game *game);
+void	setup_signal_handlers(void);
+int		should_close_game(void);
+int		parse_element_line(t_game *game, char *line);
+int		set_texture(char **slot, char *line);
+int		parse_color(char *str, int *rgb);
+int		is_map_or_empty_line(char *line);
 void	handle_movement(t_game *game);
 void	draw_minimap(t_game *game);
 void	render_3d(t_game *game);

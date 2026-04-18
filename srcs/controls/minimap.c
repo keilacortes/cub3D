@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 19:35:12 by kqueiroz          #+#    #+#             */
-/*   Updated: 2026/04/17 15:08:36 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/17 20:36:31 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	draw_minimap(t_game *game)
 
 int	game_loop(t_game *game)
 {
+	if (should_close_game())
+		close_game(game);
 	handle_movement(game);
 	render_3d(game);
 	draw_minimap(game);

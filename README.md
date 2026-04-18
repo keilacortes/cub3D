@@ -4,17 +4,19 @@
 
 ## Description
 
-**cub3D** is a first-person 3D raycasting project written in C with MiniLibX.
-It parses a `.cub` configuration file, validates the map and resources, renders
-textured walls in real time, and displays a minimap overlay.
+**cub3D** is a first-person raycasting project in C using MiniLibX (Linux).
+It parses a `.cub` file, validates map/resources, renders textured walls, and
+draws a minimap overlay.
 
-The current implementation includes:
-- DDA-based raycasting
-- Textured wall rendering (`NO`, `SO`, `WE`, `EA`)
-- Floor and ceiling RGB colors
-- Keyboard movement and camera rotation
-- Minimap + player direction indicator
-- Map validation (characters, single spawn, closed map)
+Current implementation highlights:
+- DDA raycasting (`ray_init.c`, `ray_dda.c`, `ray_project.c`)
+- Textured walls (`NO`, `SO`, `WE`, `EA`)
+- Floor and ceiling RGB colors (`F`, `C`)
+- Strict parser checks (missing/duplicate elements, malformed colors, unknown identifiers)
+- Map validation (allowed chars, single spawn, closed map, irregular line safety)
+- Continuous render loop with minimap + player direction
+- Frame-time scaled movement/rotation (`get_frame_scale`) to avoid FPS-dependent speed
+- Clean shutdown on `ESC`, window close, and `SIGINT` (`Ctrl+C`)
 
 ---
 
@@ -22,10 +24,10 @@ The current implementation includes:
 
 ### Requirements
 
-- GCC or compatible C compiler
+- GCC (or compatible C compiler)
 - `make`
 - Linux with X11 libraries (`libx11`, `libxext`, `zlib`, `libm`)
-- MiniLibX Linux version (already vendored in `libs/minilibx`)
+- MiniLibX Linux (vendored in `libs/minilibx`)
 
 ### Compile
 
@@ -47,52 +49,56 @@ make fclean
 make re
 ```
 
-### Valgrind target
+### Valgrind target (Makefile)
 
 ```bash
 make valgrind ARGS="maps/simple.cub"
 ```
-
-> Note: the Makefile valgrind rule references `valgrind.supp`.
 
 ---
 
 ## Controls
 
 - `W` / `S`: move forward / backward
-- `A` / `D`: strafe
+- `A` / `D`: strafe left / right
 - `Left Arrow` / `Right Arrow`: rotate camera
 - `ESC`: exit
+- `Ctrl+C`: graceful exit path (signal flag handled in loop)
 
 ---
 
-## `.cub` File Format (as implemented)
+## `.cub` Format (as implemented)
 
 A valid file must provide:
-1. Texture paths:
+1. Texture paths (exactly once each):
    - `NO path_to_north_texture`
    - `SO path_to_south_texture`
    - `WE path_to_west_texture`
    - `EA path_to_east_texture`
-2. Colors:
+2. Colors (exactly once each):
    - `F r,g,b`
-   - `C r,g,b`  
-   where each color component is in `[0, 255]`.
+   - `C r,g,b`
 3. A map block at the end of the file.
+
+Parser rules currently enforced:
+- Color format must contain exactly 2 commas and 3 numeric components.
+- Color values must be in `[0, 255]`.
+- Unknown non-map identifiers are rejected.
+- Duplicate texture/color entries are rejected.
 
 Valid map characters:
 - `1` wall
 - `0` walkable tile
-- `N`, `S`, `E`, `W` player spawn (exactly one)
+- `N`, `S`, `E`, `W` spawn (exactly one)
 - space (` `) as map padding/outside area
 
 Example:
 
 ```text
-NO srcs/assets/bricks_1.xpm
-SO srcs/assets/bricks_1.xpm
+NO srcs/assets/Rocks_1.xpm
+SO srcs/assets/Rocks_2.xpm
 WE srcs/assets/bricks_1.xpm
-EA srcs/assets/bricks_1.xpm
+EA srcs/assets/bricks_2.xpm
 
 F 220,100,0
 C 225,30,0
@@ -115,20 +121,22 @@ C 225,30,0
 │   ├── libft/
 │   └── minilibx/
 ├── maps/
-│   ├── simple.cub
-│   └── valid_map_test.cub
+│   └── simple.cub
 ├── srcs/
 │   ├── main.c
 │   ├── cub3d_utils.c
 │   ├── cleanup_game.c
+│   ├── signal_handler.c
 │   ├── controls/
 │   │   ├── hooks.c
 │   │   ├── movement.c
 │   │   └── minimap.c
 │   ├── parse/
 │   │   ├── parse_file.c
-│   │   ├── parse_map.c
+│   │   ├── set_texture.c
 │   │   ├── parse_utils.c
+│   │   ├── parse_map.c
+│   │   ├── parse_map_helpers.c
 │   │   ├── player_spawn.c
 │   │   ├── validate_map.c
 │   │   └── validate_tex.c
@@ -148,14 +156,37 @@ C 225,30,0
 
 ```text
 .cub file
-  -> parse elements (textures/colors)
-  -> parse map
-  -> validate map and spawn
-  -> game loop
-  -> movement update
-  -> ray init + DDA
-  -> wall projection + texture sampling
-  -> frame draw + minimap overlay
+  -> parse/validate elements
+  -> extract final map block
+  -> validate map/spawn/closure
+  -> init MLX + textures
+  -> loop:
+       movement (time-scaled)
+       render_3d (raycast + textured walls)
+       draw_minimap overlay
+```
+
+---
+
+## Useful Checks
+
+### Norminette
+
+```bash
+norminette inc srcs
+```
+
+### Full Valgrind (recommended for evaluation)
+
+```bash
+valgrind \
+  --leak-check=full \
+  --show-leak-kinds=all \
+  --track-origins=yes \
+  --num-callers=25 \
+  --errors-for-leak-kinds=all \
+  --error-exitcode=42 \
+  ./cub3D maps/simple.cub
 ```
 
 ---
@@ -166,16 +197,6 @@ C 225,30,0
 - [DDA line traversal concept](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm))
 - [MiniLibX (42 Linux)](https://github.com/42Paris/minilibx-linux)
 - [XPM format](https://en.wikipedia.org/wiki/X_PixMap)
-
----
-
-## AI Usage
-
-AI assistance was used for:
-1. debugging and edge-case analysis (raycasting/minimap integration),
-2. refactoring for Norminette compliance,
-3. improving naming/readability suggestions,
-4. README and project documentation updates.
 
 ---
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loena <loena@student.42.fr>                +#+  +:+       +#+        */
+/*   By: loda-sil <loda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:46:45 by loena             #+#    #+#             */
-/*   Updated: 2026/04/17 15:58:01 by loena            ###   ########.fr       */
+/*   Updated: 2026/04/17 20:24:23 by loda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ static void	draw_tex_pixels(t_game *game, t_ray *ray, t_img *tex, int pos[2])
 	while (y < ray->draw_end)
 	{
 		tex_y = (int)tex_pos;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= tex->height)
+			tex_y = tex->height - 1;
 		tex_pos += step;
 		color = *(int *)(tex->addr + (tex_y * tex->line_len + pos[1]
 					* (tex->bpp / 8)));

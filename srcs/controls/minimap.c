@@ -32,15 +32,20 @@ void	draw_player_direction(t_game *game)
 
 	x = game->player.pos_x;
 	y = game->player.pos_y;
-	i = 0;
-	while (i < 10)
+	i = -1;
+	while (++i < 35)
 	{
-		draw_x = MINIMAP_X + x * MINIMAP_SCALE + MINIMAP_SCALE / 2.1;
-		draw_y = MINIMAP_Y + y * MINIMAP_SCALE + MINIMAP_SCALE / 2.1;
-		put_pixel_img(&game->screen, draw_x, draw_y, 0x90EE90);
-		x += game->player.dir_x * 0.2;
-		y += game->player.dir_y * 0.2;
-		i++;
+		draw_x = MINIMAP_X + x * MINIMAP_SCALE + MINIMAP_SCALE / 2.0;
+		draw_y = MINIMAP_Y + y * MINIMAP_SCALE + MINIMAP_SCALE / 2.0;
+		if (i < 25)
+			put_pixel_img(&game->screen, draw_x + (i % 5) - 2,
+				draw_y + (i / 5) - 2, 0xFF0000);
+		else
+		{
+			put_pixel_img(&game->screen, draw_x, draw_y, 0x90EE90);
+			x += game->player.dir_x * 0.2;
+			y += game->player.dir_y * 0.2;
+		}
 	}
 }
 
@@ -84,8 +89,6 @@ void	draw_minimap(t_game *game)
 		y++;
 	}
 	draw_player_direction(game);
-	draw_square(game, (int)game->player.pos_x,
-		(int)game->player.pos_y, 0xFF0000);
 }
 
 int	game_loop(t_game *game)

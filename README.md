@@ -16,7 +16,7 @@ Current implementation highlights:
 - Map validation (allowed chars, single spawn, closed map, irregular line safety)
 - Continuous render loop with minimap + player direction
 - Frame-time scaled movement/rotation (`get_frame_scale`) to avoid FPS-dependent speed
-- Clean shutdown on `ESC`, window close, and `SIGINT` (`Ctrl+C`)
+- Clean shutdown on `ESC` and window close
 
 ---
 
@@ -63,7 +63,6 @@ make valgrind ARGS="maps/simple.cub"
 - `A` / `D`: strafe left / right
 - `Left Arrow` / `Right Arrow`: rotate camera
 - `ESC`: exit
-- `Ctrl+C`: graceful exit path (signal flag handled in loop)
 
 ---
 
@@ -126,7 +125,6 @@ C 225,30,0
 │   ├── main.c
 │   ├── cub3d_utils.c
 │   ├── cleanup_game.c
-│   ├── signal_handler.c
 │   ├── controls/
 │   │   ├── hooks.c
 │   │   ├── movement.c

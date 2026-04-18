@@ -93,8 +93,6 @@ void	draw_minimap(t_game *game)
 
 int	game_loop(t_game *game)
 {
-	if (should_close_game())
-		close_game(game);
 	handle_movement(game);
 	render_3d(game);
 	draw_minimap(game);

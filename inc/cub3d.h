@@ -138,8 +138,6 @@ void	validate_map(t_game *game);
 void	check_file_tex(t_textures *tex);
 void	setup_hooks(t_game *game);
 int		game_loop(t_game *game);
-void	setup_signal_handlers(void);
-int		should_close_game(void);
 int		parse_element_line(t_game *game, char *line);
 int		set_texture(char **slot, char *line);
 int		parse_color(char *str, int *rgb);

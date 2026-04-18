@@ -93,7 +93,6 @@ int	main(int argc, char **argv)
 	init_mlx(&game);
 	load_textures(&game);
 	setup_hooks(&game);
-	setup_signal_handlers();
 	mlx_loop(game.mlx);
 	return (0);
 }

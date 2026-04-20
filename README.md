@@ -1,4 +1,13 @@
-*This project was created as part of the 42 curriculum by kqueiroz and loda-sil.*
+<div align="center">
+  <img width="150" height="150" alt="cub3dm" src="https://github.com/user-attachments/assets/4e4ef239-d792-4577-abf4-60c041a861d8" />
+</div>
+
+# 👾 Cub3D 👾
+
+> *This project was created as part of the 42 curriculum by **kqueiroz** and **loda-sil**.*
+
+![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![42sp](https://img.shields.io/badge/42sp-000000?style=for-the-badge&logo=42&logoColor=white)
 
 ---
 

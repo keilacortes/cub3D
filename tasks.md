@@ -39,10 +39,10 @@
 
 ## 🖼️ Janela — miniLibX
 
-- [ ] Usar a miniLibX para gerenciar a janela
-- [ ] Exibir a imagem renderizada na janela
-- [ ] Usar `mlx_image`
-- [ ] Gerenciamento suave da janela (minimizar, trocar de janela, etc.)
+- [x] Usar a miniLibX para gerenciar a janela
+- [x] Exibir a imagem renderizada na janela
+- [x] Usar `mlx_image`
+- [x] Gerenciamento suave da janela (minimizar, trocar de janela, etc.)
 
 ---
 
@@ -61,26 +61,26 @@
 
 ## 🛡️ Norma & Qualidade de Código
 
-- [ ] Todo o código segue a Norma da 42
-- [ ] Arquivos bônus também seguem a Norma
-- [ ] Sem crashes (segfault, bus error, double free, etc.)
-- [ ] Toda memória alocada é liberada corretamente (sem memory leaks)
+- [x] Todo o código segue a Norma da 42
+- [x] Arquivos bônus também seguem a Norma
+- [x] Sem crashes (segfault, bus error, double free, etc.)
+- [x] Toda memória alocada é liberada corretamente (sem memory leaks)
 
 ---
 
 ## 📄 README.md
 
 - [x] Primeira linha em itálico: `*Este projeto foi criado como parte do currículo da 42 por <login>...*`
-- [ ] Seção **Descrição** — objetivo e visão geral do projeto
-- [ ] Seção **Instruções** — como compilar, instalar e executar
-- [ ] Seção **Recursos** — referências (docs, artigos, tutoriais) + como a IA foi utilizada (quais tarefas e partes do projeto)
+- [x] Seção **Descrição** — objetivo e visão geral do projeto
+- [x] Seção **Instruções** — como compilar, instalar e executar
+- [x] Seção **Recursos** — referências (docs, artigos, tutoriais) + como a IA foi utilizada (quais tarefas e partes do projeto)
 
 ---
 
 ## ⭐ Bônus *(?)*
 
 - [x] Colisão com as paredes
-- [ ] Minimapa
+- [x] Minimapa
 - [ ] Portas que abrem e fecham
 - [ ] Sprite animado
 - [ ] Rotação da câmera com o mouse
